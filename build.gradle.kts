@@ -1,9 +1,11 @@
 plugins {
     kotlin("jvm") version "1.9.0"
+    `maven-publish`
 }
 
+val versionNumber = "0.1.1"
 group = "gg.airbrush"
-version = "0.1.0"
+version = versionNumber
 
 repositories {
     mavenCentral()
@@ -17,4 +19,16 @@ dependencies {
 
 kotlin {
     jvmToolchain(17)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "gg.airbrush"
+            artifactId = "plugins"
+            version = versionNumber
+
+            from(components["java"])
+        }
+    }
 }
